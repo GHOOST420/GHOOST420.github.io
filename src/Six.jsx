@@ -11,7 +11,7 @@ const [NovacKorisnika,SetKes]=useState(5000);
 
 
 function UplacivanjeTiketa(){
-
+if(NovacKorisnika<50){return false}else{
 if(tiket.length===6){
    if(UplaceniTiketi[0].brTiketa===0)
    {
@@ -33,7 +33,7 @@ if(tiket.length===6){
             //div.classList.add("white-bg");
    })
 }
-else{alert("Abe nemas 6 broja");}
+else{alert("Abe nemas 6 broja");}}
 }
 
 //useEffect(()=>{console.log(IzvuceniBrojevi);},[IzvuceniBrojevi])
@@ -116,8 +116,15 @@ function Sacekaj(){
 async function Algoritam(){
     if(UplaceniTiketi[0].brTiketa!=0){
     const dugme=document.getElementById("pokreni");
+    const dugme2=document.getElementById("ponovi");
+    const dugme3=document.getElementById("obrisi");
     dugme.style.pointerEvents="none";
     dugme.style.backgroundColor="gray";
+    dugme2.style.pointerEvents="none";
+    dugme2.style.backgroundColor="gray";
+    dugme3.style.pointerEvents="none";
+    dugme3.style.backgroundColor="gray";
+    
     var divBroj=[...document.getElementsByClassName("divovi")];
    
         divBroj.map((div,index)=>{
@@ -148,23 +155,36 @@ async function Algoritam(){
         
    }
    console.log(niz);
+   dugme2.style.pointerEvents="auto";
+   dugme2.style.backgroundColor="white";
+   dugme3.style.pointerEvents="auto";
+   dugme3.style.backgroundColor="white";
 }
 }
-function PromeniCenu(multipla)
+async function PromeniCenu(multipla)
 {
-    UplaceniTiketi.map((tiket,index)=>
+    UplaceniTiketi.map(async (tiket,index)=>
    {
+     const paragraf=document.getElementById("paragrafCestitka");
+     const paragraf2=document.getElementById("cestitka");
      if(!tiket.obradjenTiket){
         if(tiket.prosliBrojevi.length==6)
         {
         console.log(tiket.brTiketa);
         console.log(tiket.prosliBrojevi);
         SetKes(prosloStanje=>(prosloStanje+(50*multipla)))//zagrade zamenjuju return
+        
+        paragraf2.style.visibility="visible";
+        paragraf.innerText="Zarada "+50*multipla;
+       // alert("Cestitke ",50*multipla);
         tiket.obradjenTiket=true;
+        await Sacekaj();
+        paragraf2.style.visibility="hidden";
         }
      }
- 
+     await new Promise((tacno)=>("gas"));
    })
+   await new Promise((tacno)=>("gas"))
 }
 
 function ProveraDobitka(NoviBroj,set)
@@ -209,7 +229,7 @@ function ProveraDobitka(NoviBroj,set)
                         else{
                         up.prosliBrojevi.push(NoviBroj);
                         const element= document.getElementById("brTiketaP"+up.brTiketa+NoviBroj);
-                        element.style.backgroundColor="yellow";
+                        element.style.backgroundColor="darkgoldenrod";
                         }
                     }
 
@@ -229,6 +249,7 @@ function ProveraDobitka(NoviBroj,set)
 function ResetujBiranje()
 {
     const dugme=document.getElementById("pokreni");
+    
     dugme.style.pointerEvents="auto";
     dugme.style.backgroundColor="buttonface";
     var divBroj=[...document.getElementsByClassName("divovi")];
@@ -250,7 +271,7 @@ function Ponovi()
     SetIzvucene({izvuceni:[],trenutni:null,trenutniMaltaplaja:null});
     uplaceniBrojevidiv.map((div,index)=>
     {
-        div.style.backgroundColor="white";
+        div.style.backgroundColor="transparent";
     })
     UplaceniTiketi.map((tiket,index)=>
     {
@@ -258,19 +279,28 @@ function Ponovi()
         tiket.obradjenTiket=false;
     })
     let brojac=0;
+    let brTiketaUplacenog;
     UplaceniTiketi.map((tiket)=>
     {
         brojac++;
+        brTiketaUplacenog=tiket.brTiketa;
     })
+    if(NovacKorisnika>brojac*50&&brTiketaUplacenog!=0){
     SetKes(prosloStanje=>(prosloStanje-=brojac*50))
     Algoritam();
+    }
+    else{alert("nemas kesa decko");}
     
 }
 
 return(
     <div>
+        <div className="cestitka" id="cestitka">
+
+            <p id="paragrafCestitka">Ide gas druze</p>
+        </div>
         <div className="novac">
-            <p>{NovacKorisnika}</p>
+            <p>Raspoloziv novac: {NovacKorisnika}</p>
         </div>
         <div className="GlavniDiv">
            
@@ -312,8 +342,8 @@ return(
             </div>
             <p>{IzvuceniBrojevi.trenutniMaltaplaja}</p>
             <button id="pokreni" onClick={(()=>Algoritam())}>Pokreni igru</button>
-            <button onClick={()=>Ponovi()}>Ponovi</button>
-            <button onClick={()=>ResetujBiranje()}>Obrisi Sve</button>
+            <button id="ponovi" onClick={()=>Ponovi()}>Ponovi</button>
+            <button id="obrisi" onClick={()=>ResetujBiranje()}>Obrisi Sve</button>
 
             <p>{IzvuceniBrojevi.trenutni}</p>
             <div className="OmotacZaIzvuceneBrojeve">
@@ -321,12 +351,13 @@ return(
                 {IzvuceniBrojevi.izvuceni.map((trt,index)=>
                 {
                     return <div  className="OmotacZaIzvucenBroj" key={index}> 
-                        <p className="izbr" key={index+1}>{trt}</p>
-                        <p className="izbr" key={index+2}>{index>=5?Maltaplaja[index-5]:""}</p>
+                       <div> <p className="izbr" key={index+1}>{trt}</p></div>
+                      <div>  <p className="izbr" key={index+2}>{index>=5?Maltaplaja[index-5]:"---"}</p></div>
                         </div>
                 })}
 
             </div>
+            
     </div>
    
    

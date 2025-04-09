@@ -1,16 +1,24 @@
+body{
+    background-image: url("./assets/pozadina1.jpg");
+    
+}
+
 .GlavniDiv{
-    border: 1px solid black;
+    border: 3px solid darkgoldenrod;
     display: grid;
     grid-template-columns: repeat(10,1fr);
     grid-gap: 10px;
     padding: 20px;
+    border-radius:35px;
+    font-family: fantasy;
 }
 
 .divovi{
-    border: 1px solid black;
+    border: 3px solid darkgoldenrod;
     text-align: center;
     padding: 3px;
     background-color: white;
+    border-radius: 30px;
 }
 
 .divovi:hover{
@@ -26,23 +34,26 @@
 .PrikazTiketa{
     display:grid;
     grid-template-columns: repeat(6,1fr);
-    border: 1px solid black;
+    border: 3px solid darkgoldenrod;
     width: 50%;
     margin-top: 2%;
+    border-radius:20px;
 }
 .brojeviSaTiketaP{
-    border: 1px solid black;
+    border: 3px solid darkgoldenrod;
     text-align: center;
-    height: 100%;
-    width: 100%;
-    margin-top:0% ;
+    height: 87%;
     
+    margin-top:0% ;
+    background-color: darkgoldenrod;
+    border: 3px solid black;
+    border-radius:35px;
 }
 
 .OmotacZaUplaceneTikete{
     display: grid;
     grid-template-columns: repeat(1,1fr);
-    width: 15%;
+    width: 25%;
     grid-gap: 10px;
     margin-top: 3%;
 }
@@ -54,11 +65,13 @@
     width: 100%;
     height: 100%;
     
+    
 }
 #ptIKETI{
     margin: 0%;
-    border: 1px solid black;
+    border: 2px solid darkgoldenrod;
     height: 100%;
+    
 }
 
 .omotacZaBrojeveUplacenogTiketa{
@@ -72,34 +85,121 @@
     
 }
 
+#UplatiDugme{
+    margin-top: 2%;
+}
+
 .brTiketaP{
     margin: 0%;
-    border: 1px solid black;
+    border: 2px solid darkgoldenrod;
     height: 100%;
     width: 100%;
+   
 }
 
 .OmotacZaIzvuceneBrojeve
 {
     display: grid;
     grid-template-columns: repeat(35,1fr);
-   
+    gap: 5px;
     padding: 0%;
-    
+   
 }
 .OmotacZaIzvucenBroj
 {
    padding: 0%;
    align-items: center;
+   display: grid;
+   grid-column: 1fr;
+  
 }
 .izbr
 {
-    border: 1px solid black;
+    border: 2px solid black;
     margin-top: 0%;
     height: 100%;
     width: 100%;
     margin-bottom: 0%;
     text-align: center;
+    background-color: darkgoldenrod;
 }
 
 #pokreni{}
+
+.mainDiv{
+    border: 3px solid darkgoldenrod
+}
+.childDiv{
+    height: 50px;
+    width: 50px;
+    border: 3px solid darkgoldenrod;
+}
+
+p{
+color: white;
+font-family: fantasy;
+}
+#UplatiDugme,#pokreni,#ponovi,#obrisi{
+    background-color: white ;
+    border: 0px;
+    border-color: white;
+    width: 90px;
+    height: 40px;
+    margin-right: 1%;
+    
+   
+}
+#UplatiDugme:hover,#pokreni:hover,#ponovi:hover,#obrisi:hover{
+    background-color: darkgoldenrod !important;
+    color:white;
+    
+}
+.cestitka{
+    height: 40%;
+    width: 60%;
+   position: fixed;
+   background-color: white;
+    background-image: url(../src/assets/giphy.gif);
+   margin-left: 19%;
+   margin-top: 10%;
+    z-index: 9999;
+    visibility: hidden;
+    align-items: center;
+    border-radius: 50px;
+}
+#paragrafCestitka{
+
+   color:black;
+   margin-left:45%;
+   margin-top:18%;
+}
+@media (max-width: 768px) {
+    .GlavniDiv{
+        border: 3px solid darkgoldenrod;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-gap: 10px;
+        padding: 20px;
+    }
+    .OmotacZaIzvuceneBrojeve
+{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    gap:10px;
+    padding: 0%;
+    
+}
+.OmotacZaUplaceneTikete{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    width: 66%;
+    grid-gap: 10px;
+    margin-top: 3%;
+    
+}
+#paragrafCestitka {
+    color: black;
+    margin-left: 36%;
+    margin-top: 70%;
+}
+  }
